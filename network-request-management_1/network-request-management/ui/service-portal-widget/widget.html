@@ -1,0 +1,44 @@
+<!--
+  Service Portal Widget: My Network Requests
+  Purpose: Lets a requester see the live status of their submitted network requests
+  without navigating to the full request list. Demonstrates custom Phase 3 UI work.
+-->
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h4>My Network Requests</h4>
+  </div>
+  <div class="panel-body">
+    <div ng-if="c.data.requests.length === 0" class="text-muted">
+      You have no network requests yet.
+    </div>
+
+    <table class="table table-striped" ng-if="c.data.requests.length > 0">
+      <thead>
+        <tr>
+          <th>Number</th>
+          <th>Type</th>
+          <th>Priority</th>
+          <th>Status</th>
+          <th>Submitted</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="req in c.data.requests">
+          <td>{{req.number}}</td>
+          <td>{{req.request_type}}</td>
+          <td>
+            <span class="label" ng-class="c.priorityClass(req.priority)">
+              {{req.priority}}
+            </span>
+          </td>
+          <td>
+            <span class="label" ng-class="c.statusClass(req.state)">
+              {{req.state}}
+            </span>
+          </td>
+          <td>{{req.opened_at}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
